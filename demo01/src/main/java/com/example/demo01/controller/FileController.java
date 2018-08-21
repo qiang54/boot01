@@ -1,10 +1,9 @@
 package com.example.demo01.controller;
 
 import com.example.demo01.domain.JsonData;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.http.HttpRequest;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,10 +17,16 @@ import java.util.UUID;
  * 文件上传
  */
 @Controller
-@EnableAutoConfiguration
+@PropertySource("classpath:application.properties")
 public class FileController {
 
-    private static final String filePath = "C:\\Users\\H2\\IdeaProjects\\boot01\\demo01\\src\\main\\resources\\images\\";
+
+//    private static final String filePath =
+//            "C:\\Users\\H2\\IdeaProjects\\boot01\\demo01\\src\\main\\resources\\images\\";
+
+    @Value("${web.upload.path}")
+    private   String filePath ;
+
     @RequestMapping("/")
     @ResponseBody
     public String index(){

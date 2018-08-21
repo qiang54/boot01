@@ -1,6 +1,8 @@
 package com.example.demo01.controller;
 
+import com.example.demo01.domain.ServerSettings;
 import com.example.demo01.domain.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -31,12 +33,15 @@ public class GetController {
         return params;
     }
 
-    @GetMapping("/get/page_user2")
+    @GetMapping("/get/page")
     public Object pageUser(@RequestParam(defaultValue = "0",name = "page",required = true) int from,
                            int size){
          params.clear();
          params.put("from", from);
          params.put("size", size);
+         System.out.println("热加载");
+         //System.out.println("热加载2");
+         //System.out.println("热加载4");
          return params;
     }
 
@@ -49,4 +54,15 @@ public class GetController {
 
         return params;
     }
+
+    @Autowired
+    private ServerSettings serverSettings;
+
+    @RequestMapping(path = "/test_pro")
+    public Object testPro(){
+
+        return serverSettings;
+    }
+
+
 }
