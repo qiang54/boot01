@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
+
 @RestController
 public class GetController {
 
@@ -23,7 +24,7 @@ public class GetController {
 //        return params;
 //    }
 
-    @GetMapping("/{city_id}/{user_id}")
+    @GetMapping("/api/{city_id}/{user_id}")
     public Object findUser1(@PathVariable("city_id") String cityId, @PathVariable("user_id") String userId){
         params.clear();
 
@@ -64,5 +65,21 @@ public class GetController {
         return serverSettings;
     }
 
+    @GetMapping("/api/login")
+    public Object login(){
+
+        params.clear();
+        params.put("uername", "filter");
+
+        return params;
+    }
+
+    @RequestMapping("/api2/test/account")
+    public Object account(){
+
+        System.out.println("controller ....");
+        params.put("account","123");
+        return params;
+    }
 
 }
