@@ -12,6 +12,7 @@ public class RequestListener implements ServletRequestListener {
         System.out.println("========requestDestroyed=============");
     }
 
+
     @Override
     public void requestInitialized(ServletRequestEvent servletRequestEvent) {
 
