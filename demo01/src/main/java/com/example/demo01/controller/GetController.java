@@ -1,0 +1,52 @@
+package com.example.demo01.controller;
+
+import com.example.demo01.domain.User;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@RestController
+public class GetController {
+
+    private Map<String,Object> params = new HashMap<>();
+
+//    @RequestMapping(path = "/{city_id}/{user_id}", method = RequestMethod.GET)
+//    public Object findUser(@PathVariable("city_id") String cityId, @PathVariable("user_id") String userId){
+//        params.clear();
+//
+//        params.put("cityId", cityId);
+//        params.put("userId", userId);
+//
+//        return params;
+//    }
+
+    @GetMapping("/{city_id}/{user_id}")
+    public Object findUser1(@PathVariable("city_id") String cityId, @PathVariable("user_id") String userId){
+        params.clear();
+
+        params.put("cityId", cityId);
+        params.put("userId", userId);
+
+        return params;
+    }
+
+    @GetMapping("/get/page_user2")
+    public Object pageUser(@RequestParam(defaultValue = "0",name = "page",required = true) int from,
+                           int size){
+         params.clear();
+         params.put("from", from);
+         params.put("size", size);
+         return params;
+    }
+
+
+    @RequestMapping(path = "/save/user")
+    public Object saveUser(@RequestBody User user){
+
+        params.clear();
+        params.put("user", user);
+
+        return params;
+    }
+}
