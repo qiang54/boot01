@@ -11,11 +11,13 @@ import java.util.Date;
  *
  */
 
-@Component
+//@Component
 public class TestTask {
 
-    @Scheduled(fixedRate = 2000)
-    public void test(){
+    //@Scheduled(fixedRate = 2000)
+    @Scheduled(cron = "*/1 * *  * * *")
+    public void test() throws InterruptedException {
+        Thread.sleep(4000L);
         System.out.println("当前时间："+ new Date());
     }
 }

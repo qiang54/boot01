@@ -8,6 +8,7 @@ import com.example.demomybatis.domain.JsonData;
 import com.example.demomybatis.domain.User;
 import com.example.demomybatis.mapper.UserMapper;
 import com.example.demomybatis.service.UserService;
+import com.example.demomybatis.task.AsyncTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -81,16 +82,33 @@ public class UserController {
 	
 	
 	
-	
-	
+
 	//测试事务
 	@GetMapping("add_account")
 	public Object addAccount(){
 		int id = userService.addAccount();
 	    return JsonData.buildSuccess(id);
 	}
-	
-	
-	
+
+	@Autowired
+	private AsyncTask asyncTask;
+
+	//测试异步任务
+	@GetMapping("/async_task")
+	public Object exeTask(){
+
+		long begin = System.currentTimeMillis();
+
+		asyncTask.taskAsync1();
+		asyncTask.taskAsync2();
+		asyncTask.taskAsync3();
+		long end = System.currentTimeMillis();
+
+		System.out.println(end - begin);
+
+		return JsonData.buildSuccess(end - begin);
+	}
+
+
 	
 }
